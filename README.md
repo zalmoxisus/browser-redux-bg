@@ -4,10 +4,10 @@ Sends [redux](https://github.com/gaearon/redux) actions (from popup, windows or 
 
 ### Usage
 ```js
-import { createStore, compose } from 'redux'
+import { createStore, compose, combineReducers } from 'redux'
 import { persistStore, autoRehydrate } from 'redux-persist'
 import { configureSync, sync } from 'browser-redux-sync'
-import { configureBg, combineReducers } from 'browser-redux-bg';
+import { configureBg, bgReducers } from 'browser-redux-bg';
 
 import reducers from '../reducers';
 import actions from '../actions';
@@ -15,7 +15,9 @@ import actions from '../actions';
 const isFromBackground = false; // should be true for the background script
 
 const finalCreateStore = compose(autoRehydrate())(createStore)
-const store = finalCreateStore(combineReducers(reducers, isFromBackground))
+const extension = bgReducer(isFromBackground)
+const rootReducer = combineReducers({ ...reducers, extension })
+const store = finalCreateStore(rootReducer)
 const persistor = persistStore(store, configureSync(configureBg(store, actions, isFromBackground)))
 sync(persistor)
 ```

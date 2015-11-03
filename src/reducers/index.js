@@ -1,8 +1,5 @@
-import { combineReducers } from 'redux';
-
-const rootReducer = (reducers, isFromBackground) => {
-  const extension = isFromBackground ? require('./receive') : require('./send');
-  return combineReducers({ ...reducers, extension });
+const bgReducer = (isFromBackground) => {
+  return isFromBackground ? require('./receive') : require('./send');
 };
 
-export default rootReducer;
+export default bgReducer;
