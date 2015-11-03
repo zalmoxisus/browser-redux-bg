@@ -1,6 +1,6 @@
 {
   "name": "browser-redux-bg",
-  "version": "0.1.2",
+  "version": "0.2.0",
   "description": "Messaging library for Cross-browser extensions and Chrome apps. Calls actions from the background script.",
   "main": "lib/index.js",
   "scripts": {
